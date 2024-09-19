@@ -21,6 +21,7 @@
                     <th>Tanggal Terbit</th>
                     <th>Status</th>
                     <th>Aksi</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +39,6 @@
                             <span class="badge badge-out-of-stock">Habis</span>
                         @endif
                     </td>
-                    
                     <td>
                         <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" style="display:inline;">
                             @csrf
@@ -46,14 +46,24 @@
                             <button type="submit" onclick="return confirm('Anda yakin ingin menghapus buku ini?')" class="btn badge btn-danger btn-sm">Hapus</button>
                         </form>
                     </td>
+                    <td>
+                        <form action="{{ route('buku.edit', $buku->id) }}" method="POST">
+                            @csrf
+                            @method('GET')                
+                            <button type="submit" class="btn badge btn-warning btn-sm">Edit</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        <div class="jumlah-buku mt-3">
+        <div class="tambah-buku">
+            <a href="{{route('buku.create')}}" class="btn badge btn-primary">Tambah Buku</a>
+        </div>
+        <div class="jumlah-buku mt-2">
             <p><strong>Jumlah Buku:</strong> {{ $jumlah_buku }}</p>
         </div>
-        <div class="total-harga mt-3">
+        <div class="total-harga">
             <p><strong>Total Harga:</strong> {{ "Rp. ".number_format($total_harga, 2, ',', '.') }}</p>
         </div>
     </div>
