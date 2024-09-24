@@ -35,7 +35,8 @@ class BukuController extends Controller
         $buku->tgl_terbit = $request->tgl_terbit;
         $buku->save();
 
-        return redirect('/buku')->with('success', 'Buku berhasil ditambahkan');
+        return redirect('/buku')->with('success', 
+        'Buku berhasil ditambahkan');
     }
     public function edit($id)
     {

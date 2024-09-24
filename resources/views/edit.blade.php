@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('/css/stylesheet.css') }}">
 
 <div class="container">
     <h1>Edit Buku</h1>

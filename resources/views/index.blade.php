@@ -40,17 +40,20 @@
                         @endif
                     </td>
                     <td>
-                        <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('buku.destroy', $buku->id) }}" 
+                            method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Anda yakin ingin menghapus buku ini?')" class="btn badge btn-danger btn-sm">Hapus</button>
+                            <button type="submit" onclick="return confirm
+                            ('Anda yakin ingin menghapus buku ini?')" class="btn badge btn-danger 
+                            btn-sm">Hapus</button>
                         </form>
                     </td>
                     <td>
                         <form action="{{ route('buku.edit', $buku->id) }}" method="POST">
                             @csrf
                             @method('GET')                
-                            <button type="submit" class="btn badge btn-warning btn-sm">Edit</button>
+                            <button type="submit" class="btn badge btn-primary">Edit</button>
                         </form>
                     </td>
                 </tr>
@@ -58,7 +61,8 @@
             </tbody>
         </table>
         <div class="tambah-buku">
-            <a href="{{route('buku.create')}}" class="btn badge btn-primary">Tambah Buku</a>
+            <a href="{{route('buku.create')}}" 
+            class="btn badge btn-primary">Tambah Buku</a>
         </div>
         <div class="jumlah-buku mt-2">
             <p><strong>Jumlah Buku:</strong> {{ $jumlah_buku }}</p>
