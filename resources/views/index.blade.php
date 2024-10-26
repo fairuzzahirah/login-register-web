@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css" />
     <link rel="stylesheet" href="{{ asset('/css/stylesheets.css') }}">
-    <title>Daftar Buku</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+
 </head>
 <body>
     <div class="table-container">
         <h1 class="text-center mb-4">Daftar Buku</h1>
-
-        <table class="table table-striped table-bordered table-hover">
+        <table id="bookTable" class="table table-striped table-bordered table-hover" width="100%">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
@@ -40,19 +45,16 @@
                         @endif
                     </td>
                     <td>
-                        <form action="{{ route('buku.destroy', $buku->id) }}" 
-                            method="POST" style="display:inline;">
+                        <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm
-                            ('Anda yakin ingin menghapus buku ini?')" class="btn badge btn-danger 
-                            btn-sm">Hapus</button>
+                            <button type="submit" onclick="return confirm('Anda yakin ingin menghapus buku ini?')" class="btn badge btn-danger btn-sm">Hapus</button>
                         </form>
                     </td>
                     <td>
                         <form action="{{ route('buku.edit', $buku->id) }}" method="POST">
                             @csrf
-                            @method('GET')                
+                            @method('GET')
                             <button type="submit" class="btn badge btn-primary">Edit</button>
                         </form>
                     </td>
@@ -60,19 +62,13 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="tambah-buku">
-            <a href="{{route('buku.create')}}" 
-            class="btn badge btn-primary">Tambah Buku</a>
-        </div>
-        <div class="jumlah-buku mt-2">
-            <p><strong>Jumlah Buku:</strong> {{ $jumlah_buku }}</p>
-        </div>
-        <div class="total-harga">
-            <p><strong>Total Harga:</strong> {{ "Rp. ".number_format($total_harga, 2, ',', '.') }}</p>
+        <div class="d-flex justify-content-center mb-3 mt-3">
+            <a href="{{ route('buku.create') }}" class="btn badge btn-primary">Tambah Buku</a>
         </div>
     </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        new DataTable('#bookTable');
+    </script>
 </body>
 </html>

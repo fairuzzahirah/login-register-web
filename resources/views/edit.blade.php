@@ -27,4 +27,3 @@
         <button type="submit" class="btn btn-primary">Update Buku</button>
     </form>
 </div>
-//request validate butuh buat memastikan kolom2 yang akan diisi, setiap field akan ditambahkan error dan end error

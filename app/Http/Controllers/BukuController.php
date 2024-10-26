@@ -54,7 +54,8 @@ class BukuController extends Controller
         $buku->status = $request->status;
         $buku->save();
 
-        return redirect('/buku')->with('success', 'Buku berhasil diupdate');
+        return redirect('/buku')->with('success', 
+        'Buku berhasil diupdate');
     }
 
 }
