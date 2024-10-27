@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\LoginController;
 

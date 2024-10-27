@@ -13,7 +13,7 @@ class LoginController extends Controller
         // memvalidasi input yang dimasukkan user 
         $this->validate(request(), [
             'email' => 'required|email',
-            'password' => 'required|min:8',
+            'password' => 'required',
         ]);
         // mengambil inputan user
         $email = request('email');
@@ -41,7 +41,7 @@ class LoginController extends Controller
         $request->validate([
             'name' =>'required',
             'email' =>'required|email|unique:users',
-            'password' => 'required|min:8',
+            'password' => 'required',
         ]);
         // membuat user baru
         $data = [
@@ -52,7 +52,6 @@ class LoginController extends Controller
         try {
             $user = \App\Models\User::create($data);
             // Jika berhasil, tampilkan data user
-            dd($user);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, log kesalahan dan kembalikan error
             \Log::error('Error creating user: ' . $e->getMessage());
