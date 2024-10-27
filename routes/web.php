@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,9 @@ use App\Http\Controllers\BukuController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login', [LoginController::class,'index'])->name('login');
+Route::post('/login-proses', [LoginController::class,'login_proses'])->name('login_proses');
+
 Route::get('/buku', [BukuController::class,'index'])->name('buku.index');
 Route::delete('/buku/{id}', 
 [BukuController::class, 'destroy'])->name('buku.destroy');
