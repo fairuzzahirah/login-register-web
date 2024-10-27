@@ -3,25 +3,30 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title></title>Register Page
     <!-- CSS Bootstrap 5 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('/css/login-register.scss') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
   </head>
   <body class="login-page bg-body-secondary">
     <div class="login-box mx-auto" style="max-width: 400px; margin-top: 50px;">
       <div class="card card-outline card-primary">
         <div class="card-header text-center">
           <a href="/index2.html" class="link-dark text-decoration-none">
-            <h1 class="mb-0"><b>Login</b>Form</h1>
+            <h1 class="mb-0"><b>Register</b>Form</h1>
           </a>
         </div>
         <div class="card-body login-card-body">
           <p class="login-box-msg">Sign in to start your session</p>
 
-          <form action="{{ route('login_proses') }}" method="post">
+          <form action="{{ route('register_proses') }}" method="post">
             @csrf
+            <div class="input-group mb-3">
+                <span class="input-group-text"><i class="bi bi-people"></i></span>
+                <div class="form-floating flex-grow-1">
+                  <input id="loginName" name="name" type="text" class="form-control" placeholder="Name" required />
+                  <label for="loginName">Name</label>
+                </div>
+              </div>
             <div class="input-group mb-3">
               <span class="input-group-text"><i class="bi bi-envelope"></i></span>
               <div class="form-floating flex-grow-1">
@@ -46,7 +51,7 @@
                 </div>
               </div>
               <div class="col-4">
-                <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                <button type="submit" class="btn btn-primary w-100">Register</button>
               </div>
             </div>
           </form>
@@ -60,13 +65,6 @@
               <i class="bi bi-google me-2"></i> Sign in using Google+
             </a>
           </div> --}}
-
-          <p class="mb-1">
-            <a href="forgot-password.html">I forgot my password</a>
-          </p>
-          <p class="mb-0">
-            <a href="{{route('register')}}" class="text-center">Register a new membership</a>
-          </p>
         </div>
       </div>
     </div>

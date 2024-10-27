@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers;
 use Illuminate\Http\Request;
-
+use App\Models;
 class LoginController extends Controller
 {
     public function index() {
@@ -29,7 +29,37 @@ class LoginController extends Controller
         return redirect()->route('buku.index');
     }
     public function logout(){
+        // proses logout, menghapus session user dan diarahkan ke halaman login.index
         auth()->logout();
         return redirect()->route('login');
     }
+    public function register(){
+        return view('auth.register');
+    }
+    public function register_proses(Request $request){
+        // memvalidasi input yang dimasukkan user 
+        $request->validate([
+            'name' =>'required',
+            'email' =>'required|email|unique:users',
+            'password' => 'required|min:8',
+        ]);
+        // membuat user baru
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => \Hash::make($request->password),
+        ];
+        try {
+            $user = \App\Models\User::create($data);
+            // Jika berhasil, tampilkan data user
+            dd($user);
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, log kesalahan dan kembalikan error
+            \Log::error('Error creating user: ' . $e->getMessage());
+            return back()->withErrors(['message' => 'Terjadi kesalahan saat mendaftar.']);
+        }
+        // setelah pendaftaran berhasil, diarahkan ke halaman login.index
+        return redirect()->route('login');
+    }
+
 }
