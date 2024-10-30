@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers;
+use Mail;
 use Illuminate\Http\Request;
 use App\Models;
+use App\Mail\UserRegistered; 
+
 class LoginController extends Controller
 {
     public function index() {
@@ -36,29 +39,39 @@ class LoginController extends Controller
     public function register(){
         return view('auth.register');
     }
-    public function register_proses(Request $request){
-        // memvalidasi input yang dimasukkan user 
-        $request->validate([
-            'name' =>'required',
-            'email' =>'required|email|unique:users',
-            'password' => 'required',
-        ]);
-        // membuat user baru
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => \Hash::make($request->password),
-        ];
-        try {
-            $user = \App\Models\User::create($data);
-            // Jika berhasil, tampilkan data user
-        } catch (\Exception $e) {
-            // Jika terjadi kesalahan, log kesalahan dan kembalikan error
-            \Log::error('Error creating user: ' . $e->getMessage());
-            return back()->withErrors(['message' => 'Terjadi kesalahan saat mendaftar.']);
-        }
-        // setelah pendaftaran berhasil, diarahkan ke halaman login.index
-        return redirect()->route('login');
+public function register_proses(Request $request)
+{
+    // Validate user input
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required',
+    ]);
+
+    // Prepare user data
+    $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => \Hash::make($request->password),
+    ];
+
+    try {
+        // Create a new user
+        $user = \App\Models\User::create($data);
+        Mail::to($user->email)->send(new UserRegistered($user));
+        return redirect()->route('login')->with('success', 'Registration successful! Please check your email for details.');
+
+        // Send a registration email
+        
+
+        // Redirect to login with a success message
+        
+    } catch (\Exception $e) {
+        // Log the error and return with an error message
+        \Log::error('Error creating user: ' . $e->getMessage());
+        return back()->withErrors(['message' => 'Terjadi kesalahan saat mendaftar.']);
     }
+}
+
 
 }

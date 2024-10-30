@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserRegistered;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\LoginController;
 
