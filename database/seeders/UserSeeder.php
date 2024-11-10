@@ -19,12 +19,14 @@ class UserSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'password' => Hash::make('password123'), // ganti dengan password yang diinginkan
                 'email_verified_at' => now(),
+                'level' => 'admin',
             ],
             [
                 'name' => 'Regular User',
                 'email' => 'user@example.com',
                 'password' => Hash::make('userpassword'), // ganti dengan password yang diinginkan
                 'email_verified_at' => now(),
+                'level' => 'user',
             ],
         ]);
     }
